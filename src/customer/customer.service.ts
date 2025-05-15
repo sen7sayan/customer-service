@@ -1,10 +1,12 @@
 import { ConflictException, Injectable, InternalServerErrorException, NotFoundException, UnauthorizedException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
+import { Inject } from '@nestjs/common';
 import { Customer } from "./customer.entity";
 import { Repository } from "typeorm";
 import { JwtService } from "@nestjs/jwt";
 import { CreateCustomerDto } from "./dto/create-customer.dto";
 import * as bcrypt from 'bcrypt';
+import { ClientProxy } from '@nestjs/microservices';
 
 @Injectable()
 export class CustomerService{
@@ -12,7 +14,31 @@ export class CustomerService{
         @InjectRepository(Customer)
         private customerRepo:Repository<Customer>,
         private jwtService : JwtService,
+        @Inject('ORDER_SERVICE') private client: ClientProxy
     ){}
+
+    
+    async placeOrder(orderData: any) {
+        const payload = { orderData };
+        const response = await this.client.send('create_order', payload); // 🔁 send to Product-Order service
+        return response;
+    }
+
+    async singleOrder(data: any) {
+        const payload = { data };
+        const response = await this.client.send('single_order_queue', payload); // 🔁 send to Product-Order service
+        return response;
+    }
+
+    async totalOrder(data: any) {
+       try {
+         const payload = { data };
+        const response = await this.client.send('order_detail_queue', payload); // 🔁 send to Product-Order service
+        return response;
+       } catch (error) {
+        console.log(error)
+       }
+    }
 
     async create(dto : CreateCustomerDto){
         try {
@@ -118,4 +144,7 @@ export class CustomerService{
 
             return customer;
             }
+
+
+        
 }
