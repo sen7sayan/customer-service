@@ -23,6 +23,7 @@ This microservice handles customer registration, login, profile access, and orde
   "password": "123456",
   "address": "abc colony"
 }
+```
 
 **Response:**
 
@@ -34,6 +35,7 @@ This microservice handles customer registration, login, profile access, and orde
     "access_token": "<JWT_TOKEN>"
   }
 }
+```
 
 
 
@@ -49,7 +51,7 @@ This microservice handles customer registration, login, profile access, and orde
   "email": "abc5@gmail.com",
   "password": "123456"
 }
-
+```
 
 **Response:**
 
@@ -62,7 +64,7 @@ This microservice handles customer registration, login, profile access, and orde
   }
 }
 
-
+```
 
 
 
@@ -91,7 +93,7 @@ Authorization: Bearer <token>
   "address": "abc colony"
 }
 
-
+```
 
 
 
@@ -149,7 +151,7 @@ Authorization: Bearer <token>
 
 
 
-
+```
 
 ## ✅ Single Order by ID
 
@@ -194,7 +196,7 @@ Authorization: Bearer <token>
   }
 }
 
-
+```
 
 
 
@@ -229,6 +231,7 @@ Authorization: Bearer <token>
     { "productId": "af06c7c9-fe16-49c1-aa21-8fd143fd018f", "quantity": 1 }
   ]
 }
+```
 
 **Response:**
 
@@ -266,3 +269,4 @@ Authorization: Bearer <token>
 
 
 
+```
