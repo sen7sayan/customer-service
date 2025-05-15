@@ -12,6 +12,7 @@ async function bootstrap() {
     }),
   );
   app.useGlobalFilters(new ValidationExceptionFilter());
+  app.setGlobalPrefix('api');
   await app.listen(process.env.PORT ?? 3001);
 }
 bootstrap();
